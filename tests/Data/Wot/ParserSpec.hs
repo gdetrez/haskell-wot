@@ -11,7 +11,8 @@ import Data.ByteString.Lazy (pack, ByteString)
 import qualified Data.ByteString.Lazy as B
 import Data.ByteString.Base16.Lazy (decode)
 import Control.Exception (evaluate)
-import Control.Monad (liftM)
+
+import Paths_wot (getDataFileName)
 
 spec :: Spec
 spec = do
@@ -55,7 +56,8 @@ spec = do
 
     describe "readWot" $ do
       it "parses a downloaded wot file" $ do
-          result <- liftM readWot (B.readFile "tests/data/2014-09-21.wot")
+          file <- getDataFileName "2014-09-21.wot" >>= B.readFile
+          let result = readWot file
           length result `shouldBe` 55246 -- number from the 'debug' section
 
 

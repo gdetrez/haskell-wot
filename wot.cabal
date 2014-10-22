@@ -12,6 +12,9 @@ build-type:           Simple
 extra-source-files:   README.md
 cabal-version:        >=1.10
 
+data-dir:             tests/data
+data-files:           latest.wot.ar
+
 library
   -- exposed-modules:     
   -- other-modules:       

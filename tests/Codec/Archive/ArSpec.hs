@@ -9,6 +9,7 @@ import Test.Hspec
 -- import Test.QuickCheck
 
 import Codec.Archive.Ar
+import Paths_wot (getDataFileName)
 
 spec :: Spec
 spec = do
@@ -60,11 +61,11 @@ spec = do
 
   describe "parse wot file" $ do
       it "contains the right number of parts" $ do
-          file <- B.readFile "tests/data/latest.wot.ar"
+          file <- getDataFileName "latest.wot.ar" >>= B.readFile
           let result = readAr file
           length result `shouldBe` 6
       it "yields a first part with the correct name" $ do
-          file <- B.readFile "tests/data/latest.wot.ar"
+          file <- getDataFileName "latest.wot.ar" >>= B.readFile
           let (n,_,_,_,_,_) = head $ readAr file
           n `shouldBe` "README"
 
